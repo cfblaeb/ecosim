@@ -14,6 +14,7 @@ class grass(plant):
     what = "grass"
 
     def tock(self,dt):
+        self.age+=dt
         self.grow(dt)
         self.chance_of_spread+= dt
         if random.randint(0,99)<self.chance_of_spread:

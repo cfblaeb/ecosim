@@ -3,15 +3,14 @@ Created on 30/01/2014
 
 @author: HasHPIT
 '''
+from life import animal
 
-class MyClass(object):
+class rabbit(animal):
     '''
-    classdocs
+    This is a rabbit..I guess
     '''
+    what = "rabbit"
 
+    def tock(self, dt):
+        pass
 
-    def __init__(selfparams):
-        '''
-        Constructor
-        '''
-        

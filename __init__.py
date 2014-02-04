@@ -11,10 +11,9 @@ from pyglet.gl import *
 from pyglet.window import key
 from pyglet.text import Label
 
-import random
-
 from life.life import world
 from life.grass import grass
+from life.rabbit import rabbit
 
 #initialize and globals
 config = Config(sample_buffers=1, samples=4, depth_size=16, double_buffer=True,)
@@ -106,68 +105,15 @@ def draw_the_world():
                         else:
                             #lets color it
                             colors[y*grid_width*12+x*12:y*grid_width*12+x*12+12] = [0.0,1.0-0.1*obj.size,0.0]*4
+                    elif obj.what == "rabbit":
+                        #uuh its a bunny....color the bunny
+                        colors[y*grid_width*12+x*12:y*grid_width*12+x*12+12] = [1.0,1.0,1.0]*4
+                    else:
+                        print "theres a " + str(obj.what) + " at " + str(x) + "," + str(y)
+                        print "I dont know how to draw that...:("
             else:
-                #nothing her
+                #nothing here
                 colors[y*grid_width*12+x*12:y*grid_width*12+x*12+12] = [0.0,0.0,0.1]*4
-                """
-                    elif obj["type"] == "rabbit":
-                        #omg its a rabbit
-                        #so many rules
-                        #rule 1: EAT. You gots to eat and rabbits eat grass?..yeah..so check if there is grass. 
-                        #No grass, no ass, move 1 step in a random direction. If grass>2, plant your ass and eats it. Eat 2.
-                        #rule 2: rabbits age. At a certain age it starts procreation. If it finds a member of the opposite sex and
-                        #the female is not already pregnant (which she is for a certain amount (2?) of turns) then the female will get pregnant (congrats =)
-                        #at some point the die
-                        
-                        #side note: MAKE CREATURES INTO A LIST OF INDIVIDUAL CREATURES (CLASSES) and iterate through it...not this tile stuff..thats just for vegetation
-                        muchGrass = 0
-                        
-                        for iobj in the_world[y*grid_width+x]:
-                            if iobj["type"] == "grass":
-                                muchGrass = iobj["value"]
-                                
-                        for individualRabbit in range(obj["value"]):
-                            #there is grass, is there enough?
-                            if muchGrass>2:
-                                #YES! EAAAT
-                                muchGrass-=2
-                                #AND PAINT A RABBIT
-                                colors[y*grid_width*12+x*12:y*grid_width*12+x*12+12] = [1.0,1.0,1.0]*4
-                            else:
-                                #there was not enough grass. We're out of here
-                                if obj["value"] == 1: #this was the last rabbit
-                                    the_world[y*grid_width+x].remove(obj)
-                                else:
-                                    obj["value"]-=1
-                                #move the rabbit
-                                direction = random.randint(1,8)
-                                #should check if there is already a rabbit at the destination and also if there is grass.
-                                #first it should check which directions have grass. Then it should chose one of those directions
-                                #at random. If there is no grass around. The rabbit dies.
-                                #also check if we are about to move off map...errors abound
-                                #also draw the rabbit at its new position
-                                
-                                if direction == 1:#upleft
-                                    the_world[(y+1)*grid_width+x-1].append({"type":"rabbit","value":1})
-                                elif direction == 2:#up
-                                    the_world[(y+1)*grid_width+x].append({"type":"rabbit","value":1})
-                                elif direction == 3:#upright
-                                    the_world[(y+1)*grid_width+x+1].append({"type":"rabbit","value":1})
-                                elif direction == 4:#left
-                                    the_world[y*grid_width+x-1].append({"type":"rabbit","value":1})
-                                elif direction == 5:#right
-                                    the_world[y*grid_width+x+1].append({"type":"rabbit","value":1})
-                                elif direction == 6:#downleft
-                                    the_world[(y-1)*grid_width+x-1].append({"type":"rabbit","value":1})
-                                elif direction == 7:#down
-                                    the_world[(y-1)*grid_width+x].append({"type":"rabbit","value":1})
-                                elif direction == 8:#downright
-                                    the_world[(y-1)*grid_width+x+1].append({"type":"rabbit","value":1})
-                        
-                        for iobj in the_world[y*grid_width+x]:
-                            if iobj["type"] == "grass":
-                                iobj["value"] = muchGrass #update the grass
-                        """ 
     colors_gl = (GLfloat * len(colors))(*colors)
 
 def tick(dt):

@@ -57,3 +57,17 @@ class plant(object):
         self.world = world
         self.chance_of_spread = 0
         self.age = 0
+
+class animal(object):
+    '''
+    This is the foundation of any animal
+    '''
+    def __init__(self, x, y, world):
+        '''
+        growth_speed is the amount of tocks to growth.
+        It will grow until size reaches max_size 
+        '''
+        self.x = x
+        self.y = y
+        self.world = world
+        self.age = 0
