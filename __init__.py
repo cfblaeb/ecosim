@@ -13,7 +13,7 @@ from pyglet.text import Label
 
 import random
 
-from life.life import *
+from life.life import world
 from life.grass import grass
 
 #initialize and globals
@@ -172,6 +172,7 @@ def draw_the_world():
 
 def tick(dt):
     #i should pass dt to tock but for testing I am just passing 1
+    #a tock should be one hour long
     verden.tock()
     draw_the_world()
 
@@ -182,7 +183,7 @@ running = 0
 def update(dt):
     global tocktryk, spacetryk, running
     if keys[key.UP] and tocktryk == 0:        
-        tick()
+        tick(1)
         tocktryk = 1
     
     if keys[key.SPACE] and spacetryk == 0:
