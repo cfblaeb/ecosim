@@ -52,7 +52,7 @@ for x in range(grid_width):
                 colors += [0.1,0.1,0.1]*4
             else:
                 colors += [0.5,0.1,0.1]*4
-                
+
 vertices_gl = (GLfloat * len(vertices))(*vertices)
 colors_gl = (GLfloat * len(colors))(*colors)
 glEnableClientState(GL_VERTEX_ARRAY)
@@ -77,14 +77,14 @@ def on_resize(width, height):
     vertices_gl = (GLfloat * len(vertices))(*vertices)
 
 @window.event
-def on_draw(): 
-    #window.clear()    
+def on_draw():
+    #window.clear()
     glLoadIdentity()
     glVertexPointer(2, GL_FLOAT, 0, vertices_gl)
     glColorPointer(3, GL_FLOAT, 0, colors_gl)
     glDrawArrays(GL_QUADS, 0, len(vertices)//2)
     #label.draw()
-    #fps_display.draw()    
+    #fps_display.draw()
 
 def draw_the_world():
     global verden
@@ -128,10 +128,10 @@ running = 0
 
 def update(dt):
     global tocktryk, spacetryk, running
-    if keys[key.UP] and tocktryk == 0:        
+    if keys[key.UP] and tocktryk == 0:
         tick(1)
         tocktryk = 1
-    
+
     if keys[key.SPACE] and spacetryk == 0:
         spacetryk = 1
         if running == 0:
@@ -140,7 +140,7 @@ def update(dt):
         else:
             pyglet.clock.unschedule(tick)
             running = 0
-        
+
     if not keys[key.UP]:
         tocktryk = 0
     if not keys[key.SPACE]:
