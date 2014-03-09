@@ -11,6 +11,9 @@ class grass(plant):
     classdocs
     this is grass
     '''
+    def __init__(self, **kwds):
+        super(grass, self).__init__(**kwds)
+
     what = "grass"
 
     def tock(self,dt):
@@ -20,15 +23,15 @@ class grass(plant):
         if random.randint(0,99)<self.chance_of_spread:
             self.spread()
             self.chance_of_spread = 0
-    
+
     def spread(self):
         #grass will spread +/- 10 x and y
         nx = self.x + random.randint(-10,10)
         ny = self.y + random.randint(-10,10)
         grassy = [x for x in self.world.get_pos_list(nx,ny) if x.what == "grass"]
         if len(grassy) == 0:
-            self.world.add_life(grass(nx,ny,self.world))
-        
+            self.world.add_life(grass(x=nx,y=ny,world=self.world))
+
     def eat_me(self,amount=1):
         self.size -= amount
         return self.size

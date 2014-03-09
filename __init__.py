@@ -11,7 +11,7 @@ from pyglet.gl import *
 from pyglet.window import key
 from pyglet.text import Label
 
-from life.life import world
+from world.world import world
 from life.grass import grass
 from life.rabbit import rabbit
 
@@ -33,7 +33,7 @@ colors = []
 #fps_display = pyglet.clock.ClockDisplay()
 
 verden = world(grid_width,grid_height)
-verden.add_life(grass(40,40,verden))
+verden.add_life(grass(x=40,y=40,world=verden))
 
 for x in range(grid_width):
     for y in range(grid_height):
@@ -94,8 +94,8 @@ def draw_the_world():
     for y in range(grid_height):
         for x in range(grid_width):
             pos = y*grid_width+x
-            if len(verden.the_world[pos])>0:
-                for obj in verden.the_world[y*grid_width+x]: #iterate over a copy of the object list so that we can remove items from the real list
+            if len(verden._the_world[pos])>0:
+                for obj in verden._the_world[y*grid_width+x]: #iterate over a copy of the object list so that we can remove items from the real list
                     if obj.what == "grass":
                         #phew..its just some grass
                         if obj.size==0:
